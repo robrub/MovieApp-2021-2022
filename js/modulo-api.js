@@ -12,7 +12,20 @@ export const apiList = (s, type) => {
       const items = results.Search;      
       viewItems(items);
     });
+  
 };
+
+export const asApiList = async (s, type) => {
+  const url = BASE_URL + `s=${s}&type=${type}`;
+
+  try {
+    const response = await fetch(url); // Possibile error
+    viewItems(await response.json().Search);
+  } catch (error) {
+    // Si verifica in caso di errore (qualsiasi errore)
+    console.log(error.message);
+  } 
+}
 
 /**
  * Estrapola ogni elemento dell'array e stampa le proprietà
